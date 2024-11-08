@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Generate_Report_and_Send_Email" VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1343,1147" sap2010:WorkflowViewState.IdRef="Generate_Report_and_Send_Email_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Generate_Report_and_Send_Email" VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1737,1300" sap2010:WorkflowViewState.IdRef="Generate_Report_and_Send_Email_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
       <x:String>System.Activities</x:String>
@@ -58,14 +58,14 @@
       <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Generate_Report_and_Send_Email" sap:VirtualizedContainerService.HintSize="1870,1250" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Generate_Report_and_Send_Email" sap:VirtualizedContainerService.HintSize="416,1235" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message (Sub Process Start)" sap:VirtualizedContainerService.HintSize="416,173" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Started Handler Daily Reporter Layer&quot;]" />
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Data_QueueItemsListToDataTable - Invoke Workflow File (Components\Data\Data_QueueItemsListToDataTable.xaml)" sap:VirtualizedContainerService.HintSize="416,278" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Components\Data\Data_QueueItemsListToDataTable.xaml">
+    <ui:LogMessage DisplayName="Log Message (Sub Process Start)" sap:VirtualizedContainerService.HintSize="354,173" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Started Handler Daily Reporter Layer&quot;]" />
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Data_QueueItemsListToDataTable - Invoke Workflow File (Components\Data\Data_QueueItemsListToDataTable.xaml)" sap:VirtualizedContainerService.HintSize="354,275" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Components\Data\Data_QueueItemsListToDataTable.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <scg:Dictionary x:TypeArguments="x:String, Argument" />
       </ui:InvokeWorkflowFile.Arguments>
@@ -75,7 +75,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:InvokeWorkflowFile>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Data_DataTableToNewWorkbook - Invoke Workflow File (Components\Excel\Data_DataTableToNewWorkbook.xaml)" sap:VirtualizedContainerService.HintSize="416,204" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Components\Excel\Data_DataTableToNewWorkbook.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Outlook_SendEmail - Invoke Workflow File (Components\Outlook\Outlook_SendEmail.xaml)" sap:VirtualizedContainerService.HintSize="354,275" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Components\Outlook\Outlook_SendEmail.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <scg:Dictionary x:TypeArguments="x:String, Argument" />
       </ui:InvokeWorkflowFile.Arguments>
@@ -85,7 +85,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:InvokeWorkflowFile>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Outlook_SendEmail - Invoke Workflow File (Components\Outlook\Outlook_SendEmail.xaml)" sap:VirtualizedContainerService.HintSize="416,204" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Components\Outlook\Outlook_SendEmail.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Orchestrator_MarkQueueItemsInListSuccessful - Invoke Workflow File (Components\Orchestrator\Orchestrator_MarkQueueItemsInListSuccessful.xaml)" sap:VirtualizedContainerService.HintSize="354,260" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="Components\Orchestrator\Orchestrator_MarkQueueItemsInListSuccessful.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <scg:Dictionary x:TypeArguments="x:String, Argument" />
       </ui:InvokeWorkflowFile.Arguments>
@@ -95,16 +95,6 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:InvokeWorkflowFile>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Orchestrator_MarkQueueItemsInListSuccessful - Invoke Workflow File (Components\Orchestrator\Orchestrator_MarkQueueItemsInListSuccessful.xaml)" sap:VirtualizedContainerService.HintSize="416,204" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="Components\Orchestrator\Orchestrator_MarkQueueItemsInListSuccessful.xaml">
-      <ui:InvokeWorkflowFile.Arguments>
-        <scg:Dictionary x:TypeArguments="x:String, Argument" />
-      </ui:InvokeWorkflowFile.Arguments>
-      <sap:WorkflowViewStateService.ViewState>
-        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-        </scg:Dictionary>
-      </sap:WorkflowViewStateService.ViewState>
-    </ui:InvokeWorkflowFile>
-    <ui:LogMessage DisplayName="Log Message a9Sub Process End)" sap:VirtualizedContainerService.HintSize="416,164" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Started Handler Daily Reporter Layer&quot;]" />
+    <ui:LogMessage DisplayName="Log Message a9Sub Process End)" sap:VirtualizedContainerService.HintSize="354,164" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Started Handler Daily Reporter Layer&quot;]" />
   </Sequence>
 </Activity>

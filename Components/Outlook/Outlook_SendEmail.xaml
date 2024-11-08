@@ -1,4 +1,15 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Outlook_SendEmail" VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1342,1602" sap2010:WorkflowViewState.IdRef="Outlook_SendEmail_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Outlook_SendEmail" this:Outlook_SendEmail.in_strAttachmentPath="Z:\Reporting\ReturnedMail_DailyReport_11082024.xlsx" this:Outlook_SendEmail.in_strSubject="Test" this:Outlook_SendEmail.in_strTo="vlad.turturica@tqasolutions.com" this:Outlook_SendEmail.in_strBody="Hi,&lt;br&gt;test" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:umam="clr-namespace:UiPath.MicrosoftOffice365.Activities.Mail;assembly=UiPath.MicrosoftOffice365.Activities" xmlns:umame="clr-namespace:UiPath.MicrosoftOffice365.Activities.Mail.Enums;assembly=UiPath.MicrosoftOffice365.Activities" xmlns:upr="clr-namespace:UiPath.Platform.ResourceHandling;assembly=UiPath.Platform" xmlns:usau="clr-namespace:UiPath.Shared.Activities.Utils;assembly=UiPath.MicrosoftOffice365.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_strAttachmentPath" Type="InArgument(x:String)" />
+    <x:Property Name="in_strSubject" Type="InArgument(x:String)" />
+    <x:Property Name="in_strTo" Type="InArgument(x:String)" />
+    <x:Property Name="in_strBody" Type="InArgument(x:String)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1737,1180</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>Outlook_SendEmail_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
       <x:String>System.Activities</x:String>
@@ -27,6 +38,15 @@
       <x:String>GlobalConstantsNamespace</x:String>
       <x:String>System.Runtime.Serialization</x:String>
       <x:String>System.Reflection</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Activities.Mail.Enums</x:String>
+      <x:String>UiPath.Shared.Activities.Utils</x:String>
+      <x:String>UiPath.Platform.ResourceHandling</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Activities.Mail</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.Shared.Activities.ConnectionService.Contracts</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Activities</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>UiPath.Platform</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -60,52 +80,78 @@
       <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
       <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
       <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>UiPath.MicrosoftOffice365.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.Testing.Activities</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.CodeDom</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Forms</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Core</AssemblyReference>
+      <AssemblyReference>UiPath.CodedWorkflows</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Outlook_SendEmail" sap:VirtualizedContainerService.HintSize="512,1537" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Outlook_SendEmail" sap:VirtualizedContainerService.HintSize="416,1006" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
-      <Variable x:TypeArguments="x:String" Name="strComponentName">
-        <Variable.Default>
-          <Literal x:TypeArguments="x:String">Outlook_SendEmail</Literal>
-        </Variable.Default>
-      </Variable>
+      <Variable x:TypeArguments="x:String" Default="Outlook_SendEmail" Name="strComponentName" />
+      <Variable x:TypeArguments="upr:ILocalResource" Name="resAttachment" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message (Componen Started)" sap:VirtualizedContainerService.HintSize="450,173" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[String.Format(&quot;Started Component {0}&quot;, strComponentName)]" />
-    <Sequence DisplayName="Check Arguments In" sap:VirtualizedContainerService.HintSize="450,556" sap2010:WorkflowViewState.IdRef="Sequence_3">
-      <sap:WorkflowViewStateService.ViewState>
-        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-        </scg:Dictionary>
-      </sap:WorkflowViewStateService.ViewState>
-      <If Condition="[String.IsNullOrWhiteSpace(in_Argument)]" DisplayName="Incoming Argument Check - in_Argument" sap:VirtualizedContainerService.HintSize="388,436" sap2010:WorkflowViewState.IdRef="If_1">
-        <If.Then>
-          <Throw DisplayName="Throw In Argument AE" Exception="[New Exception(&quot;Incoming Argument REPLACE_ME is Null or Not Populated!&quot;)]" sap:VirtualizedContainerService.HintSize="334,90" sap2010:WorkflowViewState.IdRef="Throw_1" />
-        </If.Then>
-        <If.Else>
-          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,141" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[String.Format(&quot;Incoming Argument REPLACE_ME (Ref: {0}) is Not Null and is Populated!&quot;, in_Argument )]" />
-        </If.Else>
-      </If>
-    </Sequence>
-    <Sequence DisplayName="Check Arguments Out" sap:VirtualizedContainerService.HintSize="450,556" sap2010:WorkflowViewState.IdRef="Sequence_2">
-      <sap:WorkflowViewStateService.ViewState>
-        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-        </scg:Dictionary>
-      </sap:WorkflowViewStateService.ViewState>
-      <If Condition="[String.IsNullOrWhiteSpace(out_Argument)]" DisplayName="Outgoing Argument Check - out_Argument" sap:VirtualizedContainerService.HintSize="388,436" sap2010:WorkflowViewState.IdRef="If_2">
-        <If.Then>
-          <Throw DisplayName="Throw Out Argument AE" Exception="[New Exception(&quot;Outgoing Argument REPLACE_ME is Null or Not Populated!&quot;)]" sap:VirtualizedContainerService.HintSize="334,90" sap2010:WorkflowViewState.IdRef="Throw_2" />
-        </If.Then>
-        <If.Else>
-          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,141" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Trace" Message="[String.Format(&quot;Outgoing Argument REPLACE_ME (Ref: {0}) is Not Null and is Populated!&quot;, out_Argument )]" />
-        </If.Else>
-      </If>
-    </Sequence>
-    <ui:LogMessage DisplayName="Log Message (Component Complete)" sap:VirtualizedContainerService.HintSize="450,164" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[String.Format(&quot;Ended Component {0}&quot;, strComponentName)]" />
+    <ui:LogMessage DisplayName="Log Message (Componen Started)" sap:VirtualizedContainerService.HintSize="354,173" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[String.Format(&quot;Started Component {0}&quot;, strComponentName)]" />
+    <ui:PathExists Exists="{x:Null}" DisplayName="Path Exists" sap:VirtualizedContainerService.HintSize="354,147" sap2010:WorkflowViewState.IdRef="PathExists_1" Path="[in_strAttachmentPath]" PathType="File" Resource="[resAttachment]" />
+    <umam:SendMailConnections ArgumentAttachmentPaths="{x:Null}" Attachments="{x:Null}" ConnectionAccountName="{x:Null}" TextBody="{x:Null}" AttachmentInputMode="Builder" AttachmentPaths="{x:Null}" AuthScopesInvalid="False" Bcc="{x:Null}" Body="[in_strBody]" Cc="{x:Null}" ConnectionId="eba3d4b1-f656-4668-b3c4-1167bd238f83" ContinueOnError="{x:Null}" DisplayName="Send Email" sap:VirtualizedContainerService.HintSize="354,434" sap2010:WorkflowViewState.IdRef="SendMailConnections_1" Importance="Normal" InputType="HTML" Mailbox="{x:Null}" ReplyTo="{x:Null}" SaveAsDraft="False" SingleAttachment="{x:Null}" Subject="[in_strSubject]" To="[Split(in_strTo,&quot;,&quot;c)]" UseConnectionService="True" UseSharedMailbox="False">
+      <umam:SendMailConnections.AttachmentList>
+        <scg:List x:TypeArguments="InArgument(upr:IResource)" Capacity="4">
+          <InArgument x:TypeArguments="upr:IResource">[resAttachment]</InArgument>
+        </scg:List>
+      </umam:SendMailConnections.AttachmentList>
+      <umam:SendMailConnections.AttachmentsBackup>
+        <usau:BackupSlot x:TypeArguments="umame:AttachmentInputMode" StoredValue="Builder">
+          <usau:BackupSlot.BackupValues>
+            <scg:List x:TypeArguments="x:Object" x:Key="Existing" Capacity="1">
+              <InArgument x:TypeArguments="scg:IEnumerable(upr:IResource)">[in_strAttachmentPath]</InArgument>
+            </scg:List>
+          </usau:BackupSlot.BackupValues>
+        </usau:BackupSlot>
+      </umam:SendMailConnections.AttachmentsBackup>
+      <umam:SendMailConnections.InputTypeBackup>
+        <usau:BackupSlot x:TypeArguments="umame:BodyInputType" StoredValue="HTML">
+          <usau:BackupSlot.BackupValues>
+            <scg:List x:TypeArguments="x:Object" x:Key="HTML" Capacity="1">
+              <InArgument x:TypeArguments="x:String">[in_strBody]</InArgument>
+            </scg:List>
+            <scg:List x:TypeArguments="x:Object" x:Key="TEXT" Capacity="1">
+              <x:Null />
+            </scg:List>
+          </usau:BackupSlot.BackupValues>
+        </usau:BackupSlot>
+      </umam:SendMailConnections.InputTypeBackup>
+      <umam:SendMailConnections.MailboxBackup>
+        <usau:BackupSlot x:TypeArguments="umame:MailboxSelectionMode" StoredValue="NoMailbox">
+          <usau:BackupSlot.BackupValues>
+            <scg:Dictionary x:TypeArguments="umame:MailboxSelectionMode, scg:List(x:Object)" />
+          </usau:BackupSlot.BackupValues>
+        </usau:BackupSlot>
+      </umam:SendMailConnections.MailboxBackup>
+    </umam:SendMailConnections>
+    <ui:LogMessage DisplayName="Log Message (Component Complete)" sap:VirtualizedContainerService.HintSize="354,164" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[String.Format(&quot;Ended Component {0}&quot;, strComponentName)]" />
   </Sequence>
 </Activity>

@@ -7,7 +7,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1343,2800</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1737,2912</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Data_QueueItemsListToDataTable_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -101,13 +101,9 @@
       <AssemblyReference>UiPath.Workflow</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Generates data table containing fields of queue item specific content and rows of queue items.&#xD;&#xA;&#xD;&#xA;in arguments:&#xD;&#xA;in_LstQueueItems&#xD;&#xA;&#xD;&#xA;out arguments:&#xD;&#xA;out_DtQueueItems" DisplayName="Data_QueueItemsListToDataTable" sap:VirtualizedContainerService.HintSize="654,2735" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Generates data table containing fields of queue item specific content and rows of queue items.&#xA;&#xA;in arguments:&#xA;in_LstQueueItems&#xA;&#xA;out arguments:&#xA;out_DtQueueItems" DisplayName="Data_QueueItemsListToDataTable" sap:VirtualizedContainerService.HintSize="654,2807" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
-      <Variable x:TypeArguments="x:String" Name="strComponentName">
-        <Variable.Default>
-          <Literal x:TypeArguments="x:String">Data_QueueItemsListToDataTable</Literal>
-        </Variable.Default>
-      </Variable>
+      <Variable x:TypeArguments="x:String" Default="Data_QueueItemsListToDataTable" Name="strComponentName" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -139,7 +135,7 @@
         </If.Else>
       </If>
     </Sequence>
-    <Sequence DisplayName="Perform Sequence Actions (Data_QueueItemsListToDataTable)" sap:VirtualizedContainerService.HintSize="592,1057" sap2010:WorkflowViewState.IdRef="Sequence_4">
+    <Sequence DisplayName="Perform Sequence Actions (Data_QueueItemsListToDataTable)" sap:VirtualizedContainerService.HintSize="592,1129" sap2010:WorkflowViewState.IdRef="Sequence_4">
       <Sequence.Variables>
         <Variable x:TypeArguments="s:String[]" Name="arrStrFieldNames" />
       </Sequence.Variables>
@@ -148,14 +144,19 @@
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <ui:GenerateDataTable ColumnSizes="{x:Null}" NewLineSeparator="{x:Null}" Positions="{x:Null}" CSVParsing="False" ColumnSeparators="," DataTable="[out_DtQueueItems]" DisplayName="Generate Data Table From Text (in_StrFieldNames to Column Names)" sap:VirtualizedContainerService.HintSize="530,233" sap2010:WorkflowViewState.IdRef="GenerateDataTable_1" Input="[in_StrFieldNames]" UseColumnHeader="True" />
-      <Assign DisplayName="Assign (in_StrFieldNames to string array)" sap:VirtualizedContainerService.HintSize="530,114" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <ui:GenerateDataTable ColumnSizes="{x:Null}" NewLineSeparator="{x:Null}" Positions="{x:Null}" AutoDetectTypes="False" CSVParsing="False" ColumnSeparators="," DataTable="[out_DtQueueItems]" DisplayName="Generate Data Table From Text (in_StrFieldNames to Column Names)" sap:VirtualizedContainerService.HintSize="530,233" sap2010:WorkflowViewState.IdRef="GenerateDataTable_1" Input="[in_StrFieldNames]" UseColumnHeader="True" />
+      <Assign sap2010:Annotation.AnnotationText="Converting ienumerable(queueItems) to list(queueItems) breaks the key format so Key1 becomes &quot;Key1&quot; . We need to add Starting and Ending quotes after each key name so the match between the keyname and the queue item can work" DisplayName="Assign (in_StrFieldNames to string array)" sap:VirtualizedContainerService.HintSize="530,186" sap2010:WorkflowViewState.IdRef="Assign_1">
         <Assign.To>
           <OutArgument x:TypeArguments="s:String[]">[arrStrFieldNames]</OutArgument>
         </Assign.To>
         <Assign.Value>
-          <InArgument x:TypeArguments="s:String[]">[in_StrFieldNames.Split(",")]</InArgument>
+          <InArgument x:TypeArguments="s:String[]">[In_StrFieldNames.Split(","c).Select(Function(field) """" &amp; field.Trim() &amp; """" ).ToArray()]</InArgument>
         </Assign.Value>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
       </Assign>
       <ui:ForEach x:TypeArguments="ui:QueueItem" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="For each queue item in in_LstQueueItems, get the values of the specific content whose keys exists in arrStrFieldNames and add the array row to out_DtQueueItems" DisplayName="For Each (currentQueueItem in in_LstQueueItems)" sap:VirtualizedContainerService.HintSize="530,590" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[in_LstQueueItems]">
         <ui:ForEach.Body>
@@ -177,7 +178,7 @@
                   <OutArgument x:TypeArguments="s:String[]">[arrStrSpecificContent]</OutArgument>
                 </Assign.To>
                 <Assign.Value>
-                  <InArgument x:TypeArguments="s:String[]">[String.Join(", ", currentQueueItem.SpecificContent.Where(Function(x) arrStrFieldNames.Contains(x.Key)).Select(Function(x) x.Key)).Split(",")]</InArgument>
+                  <InArgument x:TypeArguments="s:String[]">[arrStrFieldNames.Select(Function(key) currentQueueItem.SpecificContent(key).ToString()).ToArray()]</InArgument>
                 </Assign.Value>
               </Assign>
               <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[arrStrSpecificContent]" DataTable="[out_DtQueueItems]" DisplayName="Add Data Row (arrStrSpecificContent)" sap:VirtualizedContainerService.HintSize="434,209" sap2010:WorkflowViewState.IdRef="AddDataRow_1" />
