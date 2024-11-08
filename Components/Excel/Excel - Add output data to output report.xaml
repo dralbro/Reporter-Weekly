@@ -119,6 +119,11 @@
   <Sequence sap2010:Annotation.AnnotationText="Add transaction Data to output report" DisplayName="Excel - Add output data to output report" sap:VirtualizedContainerService.HintSize="1870,1338" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataTable" Name="dtOutputReportClone" />
+      <Variable x:TypeArguments="x:Object" Name="strComponent">
+        <Variable.Default>
+          <VisualBasicValue x:TypeArguments="x:Object" ExpressionText="&quot;Excel - Add output data to output report&quot;" />
+        </Variable.Default>
+      </Variable>
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -126,7 +131,7 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="458,173" sap2010:WorkflowViewState.IdRef="LogMessage_1" Message="[&quot;Starting: Excel - Add output data to output report&quot;]" />
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="458,173" sap2010:WorkflowViewState.IdRef="LogMessage_1" Message="[String.Format(&quot;Starting Component&quot;,strComponent)]" />
     <Assign DisplayName="Assign clone of output report " sap:VirtualizedContainerService.HintSize="458,114" sap2010:WorkflowViewState.IdRef="Assign_1">
       <Assign.To>
         <OutArgument x:TypeArguments="sd:DataTable">[dtOutputReportClone]</OutArgument>
@@ -135,7 +140,7 @@
         <InArgument x:TypeArguments="sd:DataTable">[dtReport.Clone]</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:AddDataRow DataRow="{x:Null}" sap2010:Annotation.AnnotationText="Add following values into column&#xA;in_strTransactionItemReference&#xD;&#xA;in_strWorkItemIdentifier&#xD;&#xA;in_strBot&#xD;&#xA;in_strServer&#xD;&#xA;in_strSuccessFail&#xD;&#xA;in_strExceptionType&#xD;&#xA;in_strExceptionDetails&#xD;&#xA;in_strNextSteps" ArrayRow="[{in_strTransactionItemReference,in_strWorkItemIdentifier,in_strBot,in_strServer,in_strSuccessFail,in_strExceptionType,in_strExceptionDetails,in_strNextSteps}]" DataTable="[dtOutputReportClone]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="458,365" sap2010:WorkflowViewState.IdRef="AddDataRow_1">
+    <ui:AddDataRow DataRow="{x:Null}" sap2010:Annotation.AnnotationText="Add following values into column&#xA;in_strTransactionItemReference&#xA;in_strWorkItemIdentifier&#xA;in_strBot&#xA;in_strServer&#xA;in_strSuccessFail&#xA;in_strExceptionType&#xA;in_strExceptionDetails&#xA;in_strNextSteps" ArrayRow="[{in_strTransactionItemReference,in_strWorkItemIdentifier,in_strBot,in_strServer,in_strSuccessFail,in_strExceptionType,in_strExceptionDetails,in_strNextSteps}]" DataTable="[dtOutputReportClone]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="458,365" sap2010:WorkflowViewState.IdRef="AddDataRow_1">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
@@ -170,6 +175,6 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:RetryScope>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="458,164" sap2010:WorkflowViewState.IdRef="LogMessage_2" Message="[&quot;Ending: Excel - Add output data to output report&quot;]" />
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="458,164" sap2010:WorkflowViewState.IdRef="LogMessage_3" Message="[String.Format(&quot;Ending Component&quot;,strComponent)]" />
   </Sequence>
 </Activity>
