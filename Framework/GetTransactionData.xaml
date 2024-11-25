@@ -1,12 +1,11 @@
 <Activity mc:Ignorable="sap sap2010" x:Class="GetTransactionData" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="out_LstQueueItems" Type="OutArgument(scg:List(ui:QueueItem))" />
-    <x:Property Name="in_IntMaxQueueItems" Type="InArgument(x:Int32)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1031,1697</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1737,1906</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>GetTransactionData_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -105,9 +104,10 @@
       <AssemblyReference>System.Collections.Immutable</AssemblyReference>
       <AssemblyReference>System.Linq.Queryable</AssemblyReference>
       <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Retrieve all queue items with the status 'New' up to the number passed in as an argument and pass the list of queue items out to be processed for the report." DisplayName="Get Transaction Data" sap:VirtualizedContainerService.HintSize="688,1592" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Retrieve all queue items with the status 'New' up to the number passed in as an argument and pass the list of queue items out to be processed for the report." DisplayName="Get Transaction Data" sap:VirtualizedContainerService.HintSize="1870,1633" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:Int32" Name="intSkip" />
       <Variable x:TypeArguments="scg:IEnumerable(ui:QueueItem)" Name="ienQueueItems" />
@@ -118,8 +118,8 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message Get Transaction Item" sap:VirtualizedContainerService.HintSize="626,173" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Get the transaction item&quot;]" />
-    <Assign DisplayName="Assign (Initialize intSkip)" sap:VirtualizedContainerService.HintSize="626,114" sap2010:WorkflowViewState.IdRef="Assign_1">
+    <ui:LogMessage DisplayName="Log Message Get Transaction Item" sap:VirtualizedContainerService.HintSize="570,173" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Get the transaction item&quot;]" />
+    <Assign DisplayName="Assign (Initialize intSkip)" sap:VirtualizedContainerService.HintSize="570,114" sap2010:WorkflowViewState.IdRef="Assign_1">
       <Assign.To>
         <OutArgument x:TypeArguments="x:Int32">[intSkip]</OutArgument>
       </Assign.To>
@@ -127,7 +127,7 @@
         <InArgument x:TypeArguments="x:Int32">0</InArgument>
       </Assign.Value>
     </Assign>
-    <Assign DisplayName="Assign (Initialize ienQueueItems)" sap:VirtualizedContainerService.HintSize="626,114" sap2010:WorkflowViewState.IdRef="Assign_3">
+    <Assign DisplayName="Assign (Initialize ienQueueItems)" sap:VirtualizedContainerService.HintSize="570,114" sap2010:WorkflowViewState.IdRef="Assign_3">
       <Assign.To>
         <OutArgument x:TypeArguments="scg:IEnumerable(ui:QueueItem)">[ienQueueItems]</OutArgument>
       </Assign.To>
@@ -135,7 +135,7 @@
         <InArgument x:TypeArguments="scg:IEnumerable(ui:QueueItem)">[new List(of UiPath.Core.QueueItem)]</InArgument>
       </Assign.Value>
     </Assign>
-    <Assign DisplayName="Assign (Initialize out_LstQueueItems)" sap:VirtualizedContainerService.HintSize="626,114" sap2010:WorkflowViewState.IdRef="Assign_4">
+    <Assign DisplayName="Assign (Initialize out_LstQueueItems)" sap:VirtualizedContainerService.HintSize="570,114" sap2010:WorkflowViewState.IdRef="Assign_4">
       <Assign.To>
         <OutArgument x:TypeArguments="scg:List(ui:QueueItem)">[out_LstQueueItems]</OutArgument>
       </Assign.To>
@@ -143,18 +143,19 @@
         <InArgument x:TypeArguments="scg:List(ui:QueueItem)">[new List(of UiPath.Core.QueueItem)]</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:InterruptibleDoWhile CurrentIndex="{x:Null}" DisplayName="Do While" sap:VirtualizedContainerService.HintSize="626,947" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_1">
+    <ui:InterruptibleDoWhile CurrentIndex="{x:Null}" Condition="[Not (IsNothing(ienQueueItems)) AndAlso ienQueueItems.Count &gt; 0]" DisplayName="Do While" sap:VirtualizedContainerService.HintSize="570,1064" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_1">
       <ui:InterruptibleDoWhile.Body>
-        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="592,810" sap2010:WorkflowViewState.IdRef="Sequence_9">
+        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="536,927" sap2010:WorkflowViewState.IdRef="Sequence_9">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:GetQueueItems Duration="{x:Null}" From="{x:Null}" Priority="{x:Null}" Reference="{x:Null}" Skip="{x:Null}" TimeoutMS="{x:Null}" To="{x:Null}" DisplayName="Get Queue Items" FilterStrategy="Equals" FolderPath="in_Config(&quot;OrchestratorQueueFolder&quot;).ToString" sap:VirtualizedContainerService.HintSize="530,175" sap2010:WorkflowViewState.IdRef="GetQueueItems_1" QueueItemStates="New" QueueName="in_Config(&quot;OrchestratorQueueName&quot;).ToString" Result="[ienQueueItems]" Top="100" />
-          <If Condition="[Not (IsNothing(ienQueueItems)) AndAlso ienQueueItems.Count &gt; 0]" DisplayName="If (ienQueueItems not null and count is greater than  0)" sap:VirtualizedContainerService.HintSize="530,547" sap2010:WorkflowViewState.IdRef="If_2">
+          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="502,173" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[&quot;Skip value: &quot; +intSkip.ToString]" />
+          <ui:GetQueueItems Duration="{x:Null}" Priority="{x:Null}" Reference="{x:Null}" TimeoutMS="{x:Null}" To="{x:Null}" DisplayName="Get Queue Items" FilterStrategy="Equals" FolderPath="[Config(&quot;OrchestratorQueueFolder&quot;).ToString]" From="[Now.AddDays(-7)]" sap:VirtualizedContainerService.HintSize="502,175" sap2010:WorkflowViewState.IdRef="GetQueueItems_1" QueueItemStates="All" QueueName="[Config(&quot;OrchestratorQueueName&quot;).ToString]" Result="[ienQueueItems]" Skip="[intSkip]" Top="100" />
+          <If Condition="[Not (IsNothing(ienQueueItems)) AndAlso ienQueueItems.Count &gt; 0]" DisplayName="If (ienQueueItems not null and count is greater than  0)" sap:VirtualizedContainerService.HintSize="502,519" sap2010:WorkflowViewState.IdRef="If_2">
             <If.Then>
-              <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="496,361" sap2010:WorkflowViewState.IdRef="Sequence_10">
+              <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="468,333" sap2010:WorkflowViewState.IdRef="Sequence_10">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -164,9 +165,7 @@
                   <InvokeMethod.TargetObject>
                     <InArgument x:TypeArguments="scg:List(ui:QueueItem)">[out_LstQueueItems]</InArgument>
                   </InvokeMethod.TargetObject>
-                  <InArgument x:TypeArguments="scg:List(ui:QueueItem)">
-                    <VisualBasicValue x:TypeArguments="scg:List(ui:QueueItem)" ExpressionText="ienQueueItems.ToList" />
-                  </InArgument>
+                  <InArgument x:TypeArguments="scg:List(ui:QueueItem)">[ienQueueItems.ToList]</InArgument>
                 </InvokeMethod>
                 <Assign DisplayName="Assign (iterate intSkip by 100)" sap:VirtualizedContainerService.HintSize="434,105" sap2010:WorkflowViewState.IdRef="Assign_2">
                   <Assign.To>
@@ -191,9 +190,6 @@
           </If>
         </Sequence>
       </ui:InterruptibleDoWhile.Body>
-      <ui:InterruptibleDoWhile.Condition>
-        <VisualBasicValue x:TypeArguments="x:Boolean" DisplayName="Visual basic value" ExpressionText="Not (IsNothing(ienQueueItems)) AndAlso ienQueueItems.Count &gt; 0" />
-      </ui:InterruptibleDoWhile.Condition>
     </ui:InterruptibleDoWhile>
   </Sequence>
 </Activity>
